@@ -14,7 +14,7 @@ const InvoiceController = require('../controller/InvoiceController');
 
 // PRODUCTS || routes
 router.get('/BrandList', ProductController.BrandList)
-router.get('/CategList', ProductController.CategList)
+router.get('/CategList', ProductController .CategList)
 router.get('/SliderList', ProductController.SliderList)
 router.get('/ListByBrand/:brandID', ProductController.ListByBrand)
 router.get('/ListByCateg/:categID', ProductController.ListByCateg)
@@ -23,6 +23,8 @@ router.get('/ListBySimilar/:categoryID', ProductController.ListBySimilar)
 router.get('/ListByKeyword/:Keyword', ProductController.ListByKeyword)
 router.post('/ListByFilter', ProductController.ListByFilter)
 router.get('/ProductDetails/:productID', ProductController.ProductDetails)
+router.get('/all-products', ProductController.AllProducts)
+router.get('/all-products/:sort', ProductController.AllProducts)
 
 //  REVIEWS || routes
 router.get('/ReviewList/:productID', ProductController.ReviewList)

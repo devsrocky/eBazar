@@ -1,4 +1,9 @@
-const { BrandListService, CategListService, SliderListService, ListByBrandService, ListByCategService, ListByRemarkService, ListBySimilarService, ListByKeywordService, ListByFilterService, ProductDetailsService, ReviewListService } = require("../service/ProductService")
+const { BrandListService, CategListService, SliderListService, ListByBrandService, ListByCategService, ListByRemarkService, ListBySimilarService, ListByKeywordService, ListByFilterService, ProductDetailsService, ReviewListService, AllProductsService } = require("../service/ProductService")
+
+exports.AllProducts = async (req, res) => {
+    let data = await AllProductsService(req);
+    return res.status(200).json(data)
+}
 
 exports.BrandList = async (req, res) => {
     let data = await BrandListService();

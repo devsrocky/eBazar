@@ -7,6 +7,50 @@ const ProductModel = require('../model/ProductModel');
 const ReviewModel = require('../model/ReviewModel');
 
 
+const AllProductsService = async (req) => {
+    try{
+        const sort = req.params.sort;
+        let sortOption = {};
+        let data;
+        let projection = {$project: {
+             "_id": 1,
+            "title": 1,
+            "price": 1,
+            "discount": 1,
+            "discountPrice": 1,
+            "image":1,
+            "brandName": '$brand.brandName',
+            "categoryName":  "$category.categoryName"
+
+        }}
+        if(sort){
+            if(sort === 'low'){
+                sortOption = {price: -1}
+            }else if(sort === 'high'){
+                sortOption = {price: 1}
+            }else if(sort === 'discount'){
+                sortOption = {discount: -1 }
+            }
+            data = await ProductModel.aggregate([
+                projection,
+                {$sort: sortOption}
+            ])
+        }else{
+            data = await ProductModel.aggregate([
+            projection
+        ])
+        }
+
+
+
+
+        return {status: 'success', message: data}
+
+    }catch(err) {
+        return {status: 'failed', message: err.toString()}
+    }
+}
+
 
 const BrandListService = async () => {
     try {
@@ -369,6 +413,7 @@ const ReviewListService = async (req) => {
 
 
 module.exports = {
+    AllProductsService,
     BrandListService,
     CategListService,
     SliderListService,
