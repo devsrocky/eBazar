@@ -395,7 +395,7 @@ const ReviewListService = async (req) => {
             'des': 1,
             'rating': 1,
             'City': '$profile.cus_city',
-            'name': 'profile.cus_name'
+            'name': '$profile.cus_name'
         }}
 
         let data = await ReviewModel.aggregate([
