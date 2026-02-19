@@ -356,9 +356,11 @@ const ProductDetailsService = async (req) => {
 
         let brandJoin = {$lookup: {from: 'brands', localField: 'brandID', foreignField: '_id', as: 'brand'}};
         let categJoin = {$lookup: {from: 'categories', localField: 'categoryID', foreignField: '_id', as: 'category'}};
+        let detalJoin = {$lookup: {from: 'productdetails', localField: '_id', foreignField: 'productID', as: 'details'}
 
         let brandUnwind = {$unwind: '$brand'};
         let categUnwind = {$unwind: '$category'};
+        let detalUnwind = {$unwind: '$details'};
 
         let Projection = {$project: {
             'updatedAt': 0,
@@ -372,8 +374,8 @@ const ProductDetailsService = async (req) => {
 
         let data = await ProductModel.aggregate([
             matchStage,
-            brandJoin, categJoin,
-            brandUnwind, categUnwind,
+            brandJoin, categJoin, detalJoin,
+            brandUnwind, categUnwind, detalUnwind,
             Projection
         ])
         return {status: 'success', data: data}
