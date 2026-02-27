@@ -25,7 +25,11 @@ mongoose.connect(`mongodb+srv://prodhanr72_db_user:eBazar&6969DB@rowcommerce.oeg
 
 
 // CORS IMPLEMENTATION
-app.use(cors());
+app.set("trust proxy", 1);
+app.use(cors({
+  origin: "http://localhost:5173", // your frontend port
+  credentials: true
+}));
 
 
 // BASIC SECURITY & MIDDLEWARE IMPLEMENTATION
