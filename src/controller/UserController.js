@@ -9,8 +9,10 @@ exports.VerifyLogin = async (req, res) => {
     let data = await VerifyLoginService(req);
     if(data?.['status'] === 'success'){
         let cookieOption = {
+            httpOnly: true,          // better to keep true
             expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
-            httpOnly: false,
+            sameSite: 'None',
+            secure: true             // MUST be true on HTTPS
         }
         res.cookie('token', data['token'], cookieOption)
         return res.status(200).json(data)
