@@ -7,12 +7,14 @@ exports.CreateInvoice = async (req, res) => {
 
 exports.PaymentSuccess = async (req, res) => {
     let result = await PaymentSuccessService(req);
-    return res.status(200).json(result)
+    return res.redirect('/orders');
+    // return res.status(200).json(result)
 }
 
 exports.PaymentCancel = async (req, res) => {
     let result = await PaymentCancelService(req);
-    return res.status(200).json(result)
+    return res.redirect('/orders');
+    // return res.status(200).json(result)
 }
 
 exports.PaymentFail = async (req, res) => {
