@@ -32,3 +32,8 @@ exports.InvoiceList = async (req, res) => {
     let data = await InvoiceListService(req);
     return res.status(200).json(data)
 }
+
+exports.OrderList = async (req, res) => {
+    let data = await InvoiceListsService(req);
+    return res.status(200).json(data)
+}
