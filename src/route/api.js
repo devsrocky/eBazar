@@ -51,6 +51,7 @@ router.get('/RemoveCart/:cartID', Auth, CartController.RemoveCart)
 
 // INVOICE || routes
 router.post('/CreateInvoice', Auth, InvoiceController.CreateInvoice)
+router.get('/Invoice-order-list', Auth, InvoiceController.OrderList)
 router.get('/InvoiceList/:userId', Auth, InvoiceController.InvoiceList)
 
 
