@@ -190,6 +190,18 @@ const InvoiceListService = async (req) => {
     }
 }
 
+const InvoiceListsService = async (req) => {
+    try {
+        
+        let user = JSON.parse(req.headers['Userdetails']);
+        let userId = new ObjectID(user['userID']);
+        let data = await InvoiceModel.find({userID: userId});
+        return {status: 'success', data: data}
+
+    } catch (err) {
+        return {status: 'failed', message: err.toString()}
+    }
+}
 
 module.exports = {
     CreateInvoiceService,
@@ -197,5 +209,6 @@ module.exports = {
     PaymentCancelService,
     PaymentFailService,
     PaymentIPNService,
-    InvoiceListService
+    InvoiceListService,
+    InvoiceListsService
 }
