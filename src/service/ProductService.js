@@ -412,7 +412,26 @@ const ReviewListService = async (req) => {
     }
 }
 
+const CreateReviewService = async (req) => {
+ try {
 
+    let userdetails = JSON.parse(req.headers['Userdetails']);
+    let PostBody = req.body;
+    PostBody.userID = userdetails['userID'];
+
+    let match =  !!(await ReviewModel.exists({productID: new ObjectId(PostBody['productID']), userID: new ObjectId(userdetails['userID'])}));
+    if(match === true){
+        return {status: 'exist', message: 'Already reviewed'};
+    }else{
+        await ReviewModel.create(PostBody)
+        return {status: 'success', message: 'Review published!'};
+
+    }
+
+ } catch (err) {
+    return {status: 'failed', message: err.toString()}
+ }   
+}
 
 module.exports = {
     AllProductsService,
@@ -426,5 +445,6 @@ module.exports = {
     ListByKeywordService,
     ListByFilterService,
     ProductDetailsService,
-    ReviewListService
+    ReviewListService,
+    CreateReviewService
 }
