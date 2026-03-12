@@ -27,6 +27,7 @@ router.get('/all-products', ProductController.AllProducts)
 router.get('/all-products/:sort', ProductController.AllProducts)
 
 //  REVIEWS || routes
+router.post('/feedback', Auth, ProductController.CreateReview)
 router.get('/ReviewList/:productID', ProductController.ReviewList)
 
 // USERS || routes
